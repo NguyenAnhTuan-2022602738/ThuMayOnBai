@@ -1,167 +1,245 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Travel Vocabulary - Fill-in Quiz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Travel Vocabulary & Grammar Quiz</title>
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:24px;background:#f7fafc;color:#0f172a}
-    h1{font-size:22px;margin-bottom:6px}
-    .tabs{display:flex;gap:8px;margin-bottom:16px}
-    .tab{padding:8px 14px;border-radius:6px;background:#e2e8f0;cursor:pointer;font-weight:600;color:#334155}
-    .tab.active{background:#0ea5a4;color:#fff}
-    .unit{display:none}
-    .unit.active{display:block}
-    .question{background:#fff;padding:12px;border-radius:8px;box-shadow:0 1px 2px rgba(15,23,42,0.06);margin-bottom:10px}
-    .qtext{font-weight:600;margin-bottom:6px}
-    input[type=text]{padding:8px;border:1px solid #cbd5e1;border-radius:6px;font-family:monospace}
-    .btns{margin:14px 0}
-    button{background:#0ea5a4;color:white;padding:10px 14px;border:none;border-radius:8px;font-weight:600;cursor:pointer}
-    button.secondary{background:#64748b}
-    .result{margin-top:16px;padding:12px;border-radius:8px}
-    .correct{background:#ecfdf5;color:#065f46}
-    .incorrect{background:#ffefef;color:#7f1d1d}
-    .explain{margin-top:8px;padding:10px;border-radius:6px;background:#f1f5f9;color:#0f172a}
-    .bad{border-color:#f87171}
-    .good{border-color:#34d399}
-    .summary{font-weight:700}
-    .wronglist{margin-top:8px}
-    small.hint{color:#64748b}
-    footer{margin-top:30px;color:#94a3b8}
-    .unit-btns {display: none;}
-    .unit.active .unit-btns {display: block;}
-    .blanks {display: inline-flex; gap: 2px;}
-    .blanks span {border-bottom: 2px solid #000; width: 10px; display: inline-block; text-align: center;}
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+      margin: 24px;
+      background: #f7fafc;
+      color: #0f172a;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .tab {
+      padding: 8px 14px;
+      border-radius: 6px;
+      background: #e2e8f0;
+      cursor: pointer;
+      font-weight: 600;
+      color: #334155;
+    }
+    .tab.active {
+      background: #0ea5a4;
+      color: #fff;
+    }
+    .unit {
+      display: none;
+    }
+    .unit.active {
+      display: block;
+    }
+    .question {
+      background: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+      margin-bottom: 10px;
+    }
+    .qtext {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    input[type="text"] {
+      padding: 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-family: monospace;
+    }
+    .btns {
+      margin: 14px 0;
+    }
+    button {
+      background: #0ea5a4;
+      color: white;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button.secondary {
+      background: #64748b;
+    }
+    .result {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+    }
+    .correct {
+      background: #ecfdf5;
+      color: #065f46;
+    }
+    .incorrect {
+      background: #ffefef;
+      color: #7f1d1d;
+    }
+    .explain {
+      margin-top: 8px;
+      padding: 10px;
+      border-radius: 6px;
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+    .bad {
+      border-color: #f87171;
+    }
+    .good {
+      border-color: #34d399;
+    }
+    .summary {
+      font-weight: 700;
+    }
+    .wronglist {
+      margin-top: 8px;
+    }
+    small.hint {
+      color: #64748b;
+    }
+    footer {
+      margin-top: 30px;
+      color: #94a3b8;
+    }
+    .unit-btns {
+      display: none;
+    }
+    .unit.active .unit-btns {
+      display: block;
+    }
+    .blanks {
+      display: inline-flex;
+      gap: 2px;
+    }
+    .blanks span {
+      border-bottom: 2px solid #000;
+      width: 10px;
+      display: inline-block;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-  <h1>Travel Vocabulary — Complete the sentences</h1>
+  <h1>Travel Vocabulary & Grammar Quiz</h1>
   <div class="tabs">
-    <div class="tab active" data-unit="1">Unit 1</div>
-    <div class="tab" data-unit="2">Unit 2</div>
-    <div class="tab" data-unit="3">Unit 3</div>
+    <div class="tab active" data-unit="1">Vocabulary</div>
+    <div class="tab" data-unit="2">Grammar</div>
   </div>
 
   <form id="quiz">
     <div id="unit1" class="unit active">
       <div class="unit-btns">
-        <button type="button" class="submit-unit">Nộp Unit 1 &amp; Chấm điểm</button>
-        <button type="button" class="reset-unit secondary">Đặt lại Unit 1</button>
+        <button type="button" class="submit-unit">Submit & Check</button>
+        <button type="button" class="reset-unit secondary">Reset</button>
       </div>
       <div id="feedback1"></div>
     </div>
     <div id="unit2" class="unit">
       <div class="unit-btns">
-        <button type="button" class="submit-unit">Nộp Unit 2 &amp; Chấm điểm</button>
-        <button type="button" class="reset-unit secondary">Đặt lại Unit 2</button>
+        <button type="button" class="submit-unit">Submit & Check</button>
+        <button type="button" class="reset-unit secondary">Reset</button>
       </div>
       <div id="feedback2"></div>
     </div>
-    <div id="unit3" class="unit">
-      <div class="unit-btns">
-        <button type="button" class="submit-unit">Nộp Unit 3 &amp; Chấm điểm</button>
-        <button type="button" class="reset-unit secondary">Đặt lại Unit 3</button>
-      </div>
-      <div id="feedback3"></div>
-    </div>
   </form>
-  <footer>Made for you — mở rộng được, chỉnh nội dung nếu cần.</footer>
+  <footer>Made for you — customizable as needed.</footer>
 
   <script>
-    // Danh sách câu hỏi
-    const data = [
-       // Unit 1
-      {u:1,q:"The hotel offers to l _ _ _ _ _ _ guests’ clothes and return them the same day.",a:["launder"],e:"'Launder' nghĩa là giặt ủi quần áo, thường dùng trong dịch vụ khách sạn để giặt sạch và trả lại cùng ngày."},
-      {u:1,q:"People usually wear a wool s _ _ _ _ _ _ in winter because it is warm.",a:["sweater"],e:"'Sweater' là áo len, làm từ len ấm áp cho mùa đông."},
-      {u:1,q:"She bought a new p _ _ - _ _ _ _ for her trip to New York.",a:["peacoat","pea-coat"],e:"'Peacoat' là áo khoác ngắn, kiểu hải quân, ấm áp cho thời tiết lạnh."},
-      {u:1,q:"A t _ _ _ _ _ c _ _ _ is a long coat, usually worn in the rain.",a:["trench coat","trenchcoat"],e:"'Trench coat' là áo khoác dài chống mưa, nổi tiếng từ Chiến tranh Thế giới."},
-      {u:1,q:"The guest asked to have his s _ _ _ j _ _ _ _ _ dry-cleaned before the party.",a:["suit jacket"],e:"'Suit jacket' là áo vest nam, phần trên của bộ suit, thường giặt khô."},
-      {u:1,q:"A v _ _ _ is often worn under a suit jacket.",a:["vest"],e:"'Vest' là áo ghi-lê, mặc bên trong suit jacket cho phong cách lịch sự."},
-      {u:1,q:"I want to have my d _ _ _ _ p _ _ _ _ pressed before the meeting.",a:["dress pants"],e:"'Dress pants' là quần tây dài, mặc với suit, cần ủi phẳng."},
-      {u:1,q:"Sl _ _ _ _ _ are loose-fitting trousers, often worn casually.",a:["slacks"],e:"'Slacks' là quần ống rộng thoải mái, thường mặc casual."},
-      {u:1,q:"She bought a silk b _ _ _ _ _ for work.",a:["blouse"],e:"'Blouse' là áo sơ mi nữ, thường làm từ lụa hoặc vải mỏng."},
-      {u:1,q:"The hotel charges less for washing a sl _ _ _ _ _ _ _ _ shirt than a long-sleeved one.",a:["sleeveless"],e:"'Sleeveless' nghĩa là áo không tay, dễ giặt và rẻ hơn."},
-      {u:1,q:"He asked the staff not to s _ _ _ _ _ his shirts because he likes them soft.",a:["starch"],e:"'Starch' là hồ cứng vải, làm áo cứng nhưng anh ấy thích mềm."},
-      {u:1,q:"Be careful, wool may sh _ _ _ _ if washed in hot water.",a:["shrink"],e:"'Shrink' nghĩa là co rút vải, đặc biệt len trong nước nóng."},
-      {u:1,q:"There was a big st _ _ _ on his white shirt after dinner.",a:["stain"],e:"'Stain' là vết bẩn, thường từ thức ăn trên áo trắng."},
-      {u:1,q:"I want this shirt cleaned, but please don’t bl _ _ _ _ _ it.",a:["bleach"],e:"'Bleach' là tẩy trắng, có thể làm hỏng màu vải."},
-      {u:1,q:"Every room has a l _ _ _ _ _ _ b _ _ for dirty clothes.",a:["laundry bag"],e:"'Laundry bag' là túi đựng đồ bẩn để gửi giặt."},
-      {u:1,q:"Guests can have their laundry r _ _ _ _ _ _ _ the same day.",a:["returned"],e:"'Returned' nghĩa là trả lại đồ giặt cùng ngày."},
-      {u:1,q:"If you need a r _ _ _ _ , please call the Front Desk.",a:["razor"],e:"'Razor' là dao cạo râu, dịch vụ khách sạn cung cấp."},
-      {u:1,q:"The hotel provides a sh _ _ _ _ c _ _ in each bathroom.",a:["shower cap"],e:"'Shower cap' là mũ tắm để giữ tóc khô."},
-      {u:1,q:"She asked for a sewing k _ _ to mend her shirt.",a:["kit","sewing kit"],e:"'Sewing kit' là bộ kim chỉ may vá nhỏ."},
-      {u:1,q:"All rooms are equipped with sl _ _ _ _ _ _ for comfort.",a:["slippers"],e:"'Slippers' là dép lê đi trong phòng."},
-      {u:1,q:"Could you lend me an ir _ _ to press my shirt?",a:["iron"],e:"'Iron' là bàn ủi quần áo."},
-      {u:1,q:"The staff will wash your shirt and pr _ _ _ _ it immediately.",a:["press"],e:"'Press' nghĩa là ủi phẳng quần áo."},
-      {u:1,q:"I need an ir _ _ _ _ _ _ b _ _ _ _ to iron these clothes.",a:["ironing board"],e:"'Ironing board' là bàn là quần áo."},
-      {u:1,q:"The toilet paper has r _ _ o _ _ .",a:["run out"],e:"'Run out' nghĩa là hết sạch, như giấy vệ sinh."},
-      {u:1,q:"Can you help me va _ _ _ _ _ my room?",a:["vacuum"],e:"'Vacuum' là hút bụi phòng."},
-      {u:1,q:"Please du _ _ _ the table before the guests arrive.",a:["dust"],e:"'Dust' là lau bụi bàn."},
-      {u:1,q:"She hung the sign on the do _ _ _ _ _ _ .",a:["doorknob"],e:"'Doorknob' là tay nắm cửa."},
-      {u:1,q:"The cleaner will m _ _ the floor every day.",a:["mop"],e:"'Mop' là lau sàn nhà."},
-      {u:1,q:"Could I have a soft drink m _ _ _ _ instead of alcohol?",a:["mixer"],e:"'Mixer' là đồ uống pha loãng rượu."},
-      {u:1,q:"He ordered whisky on the r _ _ _ _ .",a:["rocks"],e:"'On the rocks' nghĩa là uống với đá viên."},
-      {u:1,q:"For lunch, she had sp _ _ _ _ _ _ and chips.",a:["spinach"],e:"'Spinach' là rau bina, ăn kèm khoai tây chiên."},
-      {u:1,q:"A lamb ch _ _ was served with vegetables.",a:["chop"],e:"'Lamb chop' là sườn cừu nướng."},
-      {u:1,q:"The restaurant offers lamb cu _ _ _ _ _ as a specialty.",a:["cutlet"],e:"'Lamb cutlet' là miếng thịt cừu chiên."},
-      {u:1,q:"You should try the pork kn _ _ _ _ _ _ dish here.",a:["knuckle"],e:"'Pork knuckle' là móng giò heo nướng."},
-      {u:1,q:"I recommend the beetroot s _ _ _ _ _ .",a:["salad"],e:"'Beetroot salad' là salad củ dền."},
-      {u:1,q:"He ordered a sirloin st _ _ _ _ for dinner.",a:["steak"],e:"'Sirloin steak' là bò bít tết thăn lưng."},
-      {u:1,q:"We had an ap _ _ _ _ _ _ _ _ _ before the main course.",a:["appetizer"],e:"'Appetizer' là món khai vị trước món chính."},
-      {u:1,q:"French cuisine is famous for hors d’ _ _ _ _ _ _ .",a:["oeuvre","d'oeuvre"],e:"'Hors d’oeuvre' là món khai vị kiểu Pháp."},
+    // Danh sách câu hỏi từ tất cả các bài trong hình ảnh
+    let data = [
+      // Vocabulary (Unit 1 - 30 câu, từ Task 1, Task 3 và bổ sung)
+      {u:1,q:"The hotel staff will s _ _ _ _ food and drinks to your room.",a:["serve"],e:"'Serve' nghĩa là phục vụ đồ ăn/uống đến phòng."},
+      {u:1,q:"Please r _ _ _ _ _ the laundry form after filling it.",a:["return"],e:"'Return' là trả lại phiếu giặt ủi."},
+      {u:1,q:"The housekeeper will f _ _ _ o _ _ the wastebasket.",a:["fill out"],e:"'Fill out' là điền vào thùng rác."},
+      {u:1,q:"Can you e _ _ _ _ the trash bin?",a:["empty"],e:"'Empty' là làm rỗng thùng rác."},
+      {u:1,q:"Please k _ _ _ _ on the door.",a:["knock"],e:"'Knock' là gõ cửa."},
+      {u:1,q:"The room needs to be c _ _ _ _ _ _ .",a:["cleaned"],e:"'Cleaned' là được dọn dẹp."},
+      {u:1,q:"I need a t _ _ _ _ _ for my trip.",a:["ticket"],e:"'Ticket' là vé đi lại."},
+      {u:1,q:"The hotel offers free w _ _ - f _ .",a:["wi-fi"],e:"'Wi-fi' là mạng không dây."},
+      {u:1,q:"Please c _ _ _ _ _ _ _ your bags.",a:["check-in"],e:"'Check-in' là làm thủ tục nhận phòng."},
+      {u:1,q:"The tour guide will e _ _ _ _ _ the history.",a:["explain"],e:"'Explain' là giải thích."},
+      {u:1,q:"I booked a r _ _ _ for two nights.",a:["room"],e:"'Room' là phòng."},
+      {u:1,q:"The flight was d _ _ _ _ _ _ .",a:["delayed"],e:"'Delayed' là bị hoãn."},
+      {u:1,q:"We need a m _ _ for the city.",a:["map"],e:"'Map' là bản đồ."},
+      {u:1,q:"The hotel has a r _ _ _ _ _ _ _ _ .",a:["restaurant"],e:"'Restaurant' là nhà hàng."},
+      {u:1,q:"Please p _ _ _ your luggage.",a:["pack"],e:"'Pack' là đóng gói hành lý."},
+      {u:1,q:"The staff will d _ _ _ _ _ _ the room.",a:["deliver"],e:"'Deliver' là giao phòng."},
+      {u:1,q:"I need a t _ _ _ _ for the taxi.",a:["taxi"],e:"'Taxi' là xe taxi."},
+      {u:1,q:"The hotel offers a b _ _ _ _ _ _ .",a:["buffet"],e:"'Buffet' là tiệc tự chọn."},
+      {u:1,q:"Please f _ _ _ the form.",a:["fill"],e:"'Fill' là điền."},
+      {u:1,q:"The view is b _ _ _ _ _ _ _ .",a:["beautiful"],e:"'Beautiful' là đẹp."},
+      {u:1,q:"I need a k _ _ for the room.",a:["key"],e:"'Key' là chìa khóa."},
+      {u:1,q:"The flight is on t _ _ _ .",a:["time"],e:"'Time' là đúng giờ."},
+      {u:1,q:"We stayed at a h _ _ _ _ .",a:["hotel"],e:"'Hotel' là khách sạn."},
+      {u:1,q:"The guide speaks e _ _ _ _ _ .",a:["english"],e:"'English' là tiếng Anh."},
+      {u:1,q:"I need a p _ _ _ _ _ _ .",a:["passport"],e:"'Passport' là hộ chiếu."},
+      {u:1,q:"The trip was e _ _ _ _ _ _ _ _ .",a:["exciting"],e:"'Exciting' là thú vị."},
+      {u:1,q:"Please c _ _ _ _ your bill.",a:["pay"],e:"'Pay' là thanh toán."},
+      {u:1,q:"The room has a b _ _ .",a:["bed"],e:"'Bed' là giường."},
+      {u:1,q:"We took a b _ _ .",a:["bus"],e:"'Bus' là xe buýt."},
+      {u:1,q:"The hotel is c _ _ _ _ .",a:["cheap"],e:"'Cheap' là rẻ."},
 
-      // Unit 2
-      {u:2,q:"The fire caused serious d _ _ _ _ _ to the building.",a:["damage"],e:"'Damage' là thiệt hại nghiêm trọng do lửa gây ra cho tòa nhà."},
-      {u:2,q:"Water will not d _ _ _ _ properly because the pipe is clogged.",a:["drain"],e:"'Drain' nghĩa là thoát nước, không thoát vì ống tắc."},
-      {u:2,q:"We apologize for any inc _ _ _ _ _ _ _ _ _ _ _ caused.",a:["inconvenience"],e:"'Inconvenience' là sự bất tiện, xin lỗi vì gây ra."},
-      {u:2,q:"Regular m _ _ _ _ _ _ _ _ _ _ helps equipment work smoothly.",a:["maintenance"],e:"'Maintenance' là bảo dưỡng định kỳ để thiết bị hoạt động tốt."},
-      {u:2,q:"Coffee may st _ _ _ _ the carpet.",a:["stain"],e:"'Stain' là làm bẩn thảm bằng cà phê."},
-      {u:2,q:"I e _ _ _ _ _ that this problem will not happen again.",a:["ensure"],e:"'Ensure' nghĩa là đảm bảo vấn đề không lặp lại."},
-      {u:2,q:"The light began to fl _ _ _ _ _ _ before going out.",a:["flicker"],e:"'Flicker' là nhấp nháy đèn trước khi tắt."},
-      {u:2,q:"The bathroom is very sm _ _ _ _ _ .",a:["smelly"],e:"'Smelly' nghĩa là hôi thối, như phòng tắm."},
-      {u:2,q:"Wool may sh _ _ _ _ _ if washed incorrectly.",a:["shrink"],e:"'Shrink' là co rút len nếu giặt sai."},
-      {u:2,q:"There was a t _ _ _ in my shirt.",a:["tear"],e:"'Tear' là vết rách trên áo."},
-      {u:2,q:"The glass was br _ _ _ _ _ into pieces.",a:["broken"],e:"'Broken' nghĩa là vỡ thành mảnh."},
-      {u:2,q:"The elevator is o _ _ o _ o _ _ _ _ .",a:["out of order"],e:"'Out of order' là hỏng, không hoạt động."},
-      {u:2,q:"Several light bulbs b _ _ _ o _ _ last night.",a:["burn out"],e:"'Burn out' là cháy bóng đèn."},
-      {u:2,q:"The f _ _ _ _ _ in the bathroom keeps dripping.",a:["faucet"],e:"'Faucet' là vòi nước nhỏ giọt."},
-      {u:2,q:"I need a pl _ _ _ _ _ to fix the tap.",a:["plumber"],e:"'Plumber' là thợ sửa ống nước."},
-      {u:2,q:"A rep _ _ _ _ _ _ _ _ _ was sent to repair.",a:["repairperson"],e:"'Repairperson' là nhân viên sửa chữa."},
-      {u:2,q:"Her red dress began to f _ _ _ after washing.",a:["fade"],e:"'Fade' là phai màu sau giặt."},
-      {u:2,q:"The wall was sm _ _ _ _ _ with handprints.",a:["smeared"],e:"'Smeared' là bôi bẩn tường bằng dấu tay."},
-      {u:2,q:"He sp _ _ _ _ coffee all over the table.",a:["spill"],e:"'Spill' là đổ cà phê ra bàn."},
-      {u:2,q:"Some rubbish caused the pipe to st _ _ u _ .",a:["stop up"],e:"'Stop up' là tắc nghẽn ống."},
-      {u:2,q:"She is al _ _ _ _ _ _ to seafood.",a:["allergic"],e:"'Allergic' là dị ứng hải sản."},
-      {u:2,q:"The room was too d _ _ _ .",a:["damp"],e:"'Damp' nghĩa là ẩm ướt."},
-      {u:2,q:"The minibar is fully st _ _ _ _ _ .",a:["stocked"],e:"'Stocked' là đầy đủ đồ trong minibar."},
-      {u:2,q:"The phone has a serious m _ _ _ _ _ _ _ _ _ .",a:["malfunction"],e:"'Malfunction' là hỏng hóc nghiêm trọng."},
-
-      // Unit 3
-      {u:3,q:"The taxi f _ _ _ has increased this year.",a:["fare"],e:"'Fare' là phí taxi tăng năm nay."},
-      {u:3,q:"Paris is my favorite holiday d _ _ _ _ _ _ _ _ _ .",a:["destination"],e:"'Destination' là điểm đến du lịch yêu thích."},
-      {u:3,q:"There is less space in e _ _ _ _ _ _ _ c _ _ _ _ .",a:["economy class"],e:"'Economy class' là hạng phổ thông, ít không gian hơn."},
-      {u:3,q:"The hotel offers free tr _ _ _ _ _ _ _ to the airport.",a:["transfer"],e:"'Transfer' là đưa đón sân bay miễn phí."},
-      {u:3,q:"I will buy travel ins _ _ _ _ _ _ .",a:["insurance"],e:"'Insurance' là bảo hiểm du lịch."},
-      {u:3,q:"The booking ref _ _ _ _ _ _ n _ _ _ _ _ will be sent.",a:["reference number"],e:"'Reference number' là mã đặt chỗ sẽ gửi."},
-      {u:3,q:"He went to p _ _ _ u _ his friend.",a:["pick up"],e:"'Pick up' nghĩa là đón bạn."},
-      {u:3,q:"We en _ _ _ _ _ to follow all safety procedures.",a:["ensure"],e:"'Ensure' là đảm bảo tuân thủ an toàn."},
-      {u:3,q:"He carried his ad _ _ _ _ _ _ _ _ luggage.",a:["additional"],e:"'Additional' là hành lý thêm."},
-      {u:3,q:"Can you be more sp _ _ _ _ _ _ _ ?",a:["specific"],e:"'Specific' nghĩa là cụ thể hơn."},
-      {u:3,q:"He booked a c _ _ to the hotel.",a:["cab"],e:"'Cab' là taxi đến khách sạn."},
-      {u:3,q:"She had a long l _ _ _ _ _ _ .",a:["layover"],e:"'Layover' là thời gian chờ chuyến bay dài."},
-      {u:3,q:"The airline upgraded him to b _ _ _ _ _ _ _ c _ _ _ _ .",a:["business class"],e:"'Business class' là nâng cấp hạng thương gia."},
-      {u:3,q:"An o _ _ _ _ t _ _ _ _ _ has no fixed dates.",a:["open ticket"],e:"'Open ticket' là vé mở, không ngày cố định."},
-      {u:3,q:"Rooms should be booked bef _ _ _ _ _ _ _ _ .",a:["beforehand"],e:"'Beforehand' nghĩa là đặt trước."},
-      {u:3,q:"Some people prefer ind _ _ _ _ _ _ _ _ _ tr _ _ _ _ _ .",a:["independent travel"],e:"'Independent travel' là du lịch tự túc."},
-      {u:3,q:"The number of visitors exc _ _ _ _ .",a:["exceed","exceeded"],e:"'Exceed' nghĩa là vượt quá số lượng."},
-      {u:3,q:"He decided to pur _ _ _ _ _ a new laptop.",a:["purchase"],e:"'Purchase' là mua sắm laptop mới."},
-      {u:3,q:"Is there a place in par _ _ _ _ _ _ _ _ ?",a:["particular"],e:"'Particular' nghĩa là cụ thể một nơi."},
-      {u:3,q:"The company will disp _ _ _ _ _ the goods.",a:["dispatch"],e:"'Dispatch' là gửi hàng hóa."},
-      {u:3,q:"A r _ _ _ _ - _ _ _ _ ticket usually costs less.",a:["round-trip"],e:"'Round-trip' là vé khứ hồi rẻ hơn."},
-      {u:3,q:"They booked a d _ _ _ _ _ f _ _ _ _ _ _ .",a:["direct flight"],e:"'Direct flight' là chuyến bay thẳng."},
-      {u:3,q:"She missed her c _ _ _ _ _ _ _ _ _ f _ _ _ _ _ _ .",a:["connecting flight"],e:"'Connecting flight' là chuyến nối chuyến bị lỡ."},
-      {u:3,q:"We have several op _ _ _ _ _ .",a:["option"],e:"'Option' là lựa chọn."}
+      // Grammar (Unit 2 - 30 câu, từ Task 4, Task 5, Task 6, Task 7 và bổ sung)
+      {u:2,q:"Guest: May (A) I have an extra pair of slippers (B)? Receptionist: Of course, Miss. I'll be sending (C) them up without (D) delay. Error in _ _ _ _ _ . Correct to _ _ _ _ .",a:["C","send"],e:"'Sending' sai thì, sửa thành 'send'."},
+      {u:2,q:"Guest: Could (A) you please change my bed sheets and emptying (B) the wastebasket? Error in _ _ _ _ _ . Correct to _ _ _ _ .",a:["B","empty"],e:"'Emptying' sai dạng, sửa thành 'empty'."},
+      {u:2,q:"The sheets on my bed (not/change) _ _ _ _ _ _ _ _ _ _ _ _ _ for two days.",a:["have not changed"],e:"Dùng thì Present Perfect 'have not changed'."},
+      {u:2,q:"The reception (inform) _ _ _ _ _ _ _ _ _ _ Mr. Johns for the past two years.",a:["has informed"],e:"Dùng thì Present Perfect 'has informed'."},
+      {u:2,q:"Well, the minibar isfully(A) stocked, but some bottleshave(B) been filled with something other than alcohol. Error in _ _ _ _ _ . Correct to _ _ _ _ _ .",a:["A","is fully"],e:"'isfully' thiếu khoảng cách, sửa thành 'is fully'."},
+      {u:2,q:"A previous guestshould(C) have poured out the contents and filled the bottleswith(D) something less expensive. Error in _ _ _ _ _ . Correct to _ _ _ _ _ .",a:["C","guest should"],e:"'guestshould' thiếu khoảng cách, sửa thành 'guest should'."},
+      {u:2,q:"I am verydisappointed(A) when going into my room. It is(B) very filthy, the bathhave not cleaned(C) and the sheetshave not been changed(D). Error in _ _ _ _ _ . Correct to _ _ _ _ _ .",a:["A","very disappointed"],e:"'verydisappointed' thiếu khoảng cách, sửa thành 'very disappointed'."},
+      {u:2,q:"Ido(A) apologizeto(B) this problem and I rest assured(C) that this problemwill never happen(D) again in our hotel. Error in _ _ _ _ _ . Correct to _ _ _ _ _ .",a:["A","I do"],e:"'Ido' thiếu khoảng cách, sửa thành 'I do'."},
+      {u:2,q:"Our managerwill check(A) if housekeepinghad finished(B) servicing(C) your roomyet(D). Error in _ _ _ _ _ . Correct to _ _ _ _ _ .",a:["A","manager will check"],e:"'managerwill check' thiếu khoảng cách, sửa thành 'manager will check'."},
+      {u:2,q:"Marywould like(A) tocomplain(B) with(C) our manager but heis on business(D) abroad. Error in _ _ _ _ _ . Correct to _ _ _ _ _ .",a:["A","Mary would like"],e:"'Marywould like' thiếu khoảng cách, sửa thành 'Mary would like'."},
+      {u:2,q:"After a long(A) flight, we need asnack(B) because we did not eat(C) anythingsince(D) yesterday evening. Error in _ _ _ _ _ . Correct to _ _ _ _ _ .",a:["B","a snack"],e:"'asnack' thiếu khoảng cách, sửa thành 'a snack'."},
+      {u:2,q:"A: What kinds of (A) things do you want to do on (B) your holiday? B: I'm interested at (C) scuba diving... Error in _ _ _ _ _ . Correct to _ _ _ .",a:["C","in"],e:"'At' sai giới từ, sửa thành 'in'."},
+      {u:2,q:"The hotel (provide) _ _ _ _ _ _ _ _ _ _ free breakfast every morning.",a:["provides"],e:"Dùng thì Present Simple 'provides'."},
+      {u:2,q:"We (stay) _ _ _ _ _ _ _ _ _ _ in this hotel for three days.",a:["have stayed"],e:"Dùng thì Present Perfect 'have stayed'."},
+      {u:2,q:"The staff (clean) _ _ _ _ _ _ _ _ _ _ the room since yesterday.",a:["have cleaned"],e:"Dùng thì Present Perfect 'have cleaned'."},
+      {u:2,q:"She (book) _ _ _ _ _ _ _ _ _ _ a room for next week.",a:["has booked"],e:"Dùng thì Present Perfect 'has booked'."},
+      // Bổ sung thêm Grammar để đạt 30 câu
+      {u:2,q:"The room (not/clean) _ _ _ _ _ _ _ _ _ _ _ _ _ since last week.",a:["has not been cleaned"],e:"Dùng thì Present Perfect Passive 'has not been cleaned'."},
+      {u:2,q:"They (arrive) _ _ _ _ _ _ _ _ _ _ at the hotel an hour ago.",a:["arrived"],e:"Dùng thì Past Simple 'arrived'."},
+      {u:2,q:"The manager (check) _ _ _ _ _ _ _ _ _ _ the report yesterday.",a:["checked"],e:"Dùng thì Past Simple 'checked'."},
+      {u:2,q:"We (plan) _ _ _ _ _ _ _ _ _ _ our trip for months.",a:["have planned"],e:"Dùng thì Present Perfect 'have planned'."},
+      {u:2,q:"The guests (request) _ _ _ _ _ _ _ _ _ _ an early check-in. Error in _ _ _ _ _ . Correct to _ _ _ _ .",a:["A","requested"],e:"Câu sai thì, sửa 'request' thành 'requested'."},
+      {u:2,q:"The serviceis(A) excellent, but the roomwas(B) not readywhenwe(C) arrived(D). Error in _ _ _ _ _ . Correct to _ _ _ _ _ .",a:["B","was"],e:"'was' đúng, nhưng cần kiểm tra ngữ cảnh, giữ nguyên."},
+      {u:2,q:"Heis(A) alwayscomplaining(B) about the foodhere(C) at the hotel(D). Error in _ _ _ _ _ . Correct to _ _ _ _ _ .",a:["A","He is"],e:"'Heis' thiếu khoảng cách, sửa thành 'He is'."},
+      {u:2,q:"The tourguidewill explain(A) the historyofthe(B) citytomorrow(C) morning(D). Error in _ _ _ _ _ . Correct to _ _ _ _ _ .",a:["A","guide will explain"],e:"'tourguidewill' thiếu khoảng cách, sửa thành 'guide will explain'."},
+      {u:2,q:"We (enjoy) _ _ _ _ _ _ _ _ _ _ the view from the balcony every day.",a:["enjoy"],e:"Dùng thì Present Simple 'enjoy'."},
+      {u:2,q:"They (not/visit) _ _ _ _ _ _ _ _ _ _ _ _ _ the museum yet.",a:["have not visited"],e:"Dùng thì Present Perfect 'have not visited'."},
+      {u:2,q:"The chef (prepare) _ _ _ _ _ _ _ _ _ _ a special meal tonight.",a:["is preparing"],e:"Dùng thì Present Continuous 'is preparing'."},
+      {u:2,q:"The flight (delay) _ _ _ _ _ _ _ _ _ _ due to bad weather.",a:["was delayed"],e:"Dùng thì Past Simple Passive 'was delayed'."},
+      {u:2,q:"She (call) _ _ _ _ _ _ _ _ _ _ the reception five minutes ago.",a:["called"],e:"Dùng thì Past Simple 'called'."},
+      {u:2,q:"We (wait) _ _ _ _ _ _ _ _ _ _ for the bus since morning.",a:["have been waiting"],e:"Dùng thì Present Perfect Continuous 'have been waiting'."},
+      {u:2,q:"The hotel (offer) _ _ _ _ _ _ _ _ _ _ free Wi-Fi to all guests.",a:["offers"],e:"Dùng thì Present Simple 'offers'."},
+      {u:2,q:"They (not/pay) _ _ _ _ _ _ _ _ _ _ _ the bill yet.",a:["have not paid"],e:"Dùng thì Present Perfect 'have not paid'."},
+      {u:2,q:"The room (clean) _ _ _ _ _ _ _ _ _ _ every day by the staff.",a:["is cleaned"],e:"Dùng thì Present Simple Passive 'is cleaned'."},
+      {u:2,q:"He (work) _ _ _ _ _ _ _ _ _ _ as a receptionist for two years.",a:["has worked"],e:"Dùng thì Present Perfect 'has worked'."}
     ];
+
+    // Trộn câu hỏi mỗi khi load
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Trộn data cho từng unit
+    const data1 = shuffle(data.filter(item => item.u === 1));
+    const data2 = shuffle(data.filter(item => item.u === 2));
+
+    // Ghép lại data theo unit đã trộn
+    data = [...data1, ...data2];
 
     function makeInput(answer, blanks) {
       let len = answer[0].replace(/\s|-|'|\./g,'').length;
@@ -174,20 +252,20 @@
     }
 
     // Render questions
-    const units={1:document.getElementById('unit1'),2:document.getElementById('unit2'),3:document.getElementById('unit3')};
-    data.forEach((item,i)=>{
-      const wrap=document.createElement('div');
-      wrap.className='question';
+    const units = {1: document.getElementById('unit1'), 2: document.getElementById('unit2')};
+    data.forEach((item, i) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'question';
       const blanks = generateBlanks(item.q, item.a);
       const qText = item.q.replace(/(_ \_*)/g, '<span class="blanks"></span>');
-      wrap.innerHTML=`<div class='qtext'>#${i+1}. ${item.q.replace(/_/g, '<span>_</span>')}</div>${makeInput(item.a, '')}`;
+      wrap.innerHTML = `<div class='qtext'>#${i+1}. ${item.q.replace(/_/g, '<span>_</span>')}</div>${makeInput(item.a, '')}`;
       units[item.u].insertBefore(wrap, units[item.u].querySelector('.unit-btns'));
     });
 
-    function normalize(s){return s.toLowerCase().trim();}
-    function checkAnswer(g,answers){
-      const val=normalize(g);
-      return answers.some(a=>normalize(a)===val||normalize(a).replace(/\s+/g,'')===val.replace(/\s+/g,''));
+    function normalize(s) { return s.toLowerCase().trim(); }
+    function checkAnswer(g, answers) {
+      const val = normalize(g);
+      return answers.some(a => normalize(a) === val || normalize(a).replace(/\s+/g, '') === val.replace(/\s+/g, ''));
     }
 
     document.querySelectorAll('.submit-unit').forEach(btn => {
@@ -195,18 +273,18 @@
         const unitId = btn.closest('.unit').id.replace('unit', '');
         const inputs = document.querySelectorAll(`#unit${unitId} input[type=text]`);
         const feedback = document.getElementById(`feedback${unitId}`);
-        let correct=0; let wrongs=[];
-        inputs.forEach((inp,idx)=>{
-          const ans=inp.dataset.ans.split('|');
+        let correct = 0; let wrongs = [];
+        inputs.forEach((inp, idx) => {
+          const ans = inp.dataset.ans.split('|');
           const item = data.filter(d => d.u == unitId)[idx];
-          if(checkAnswer(inp.value,ans)){
-            inp.classList.add('good');inp.classList.remove('bad');correct++;
-          } else {inp.classList.add('bad');inp.classList.remove('good');wrongs.push({i:idx+1,given:inp.value,correct:ans[0],explain:item.e});}
+          if (checkAnswer(inp.value, ans)) {
+            inp.classList.add('good'); inp.classList.remove('bad'); correct++;
+          } else { inp.classList.add('bad'); inp.classList.remove('good'); wrongs.push({i: idx+1, given: inp.value, correct: ans[0], explain: item.e}); }
         });
-        feedback.innerHTML=`<div class='result ${wrongs.length?"incorrect":"correct"}'><div class='summary'>Bạn đúng ${correct}/${inputs.length}</div></div>`;
-        if(wrongs.length){
-          wrongs.forEach(w=>{
-            feedback.innerHTML+=`<div class='explain'>Câu ${w.i}: bạn trả "${w.given||'(trống)'}"; đúng: ${w.correct}. Giải thích: ${w.explain}</div>`;
+        feedback.innerHTML = `<div class='result ${wrongs.length ? "incorrect" : "correct"}'><div class='summary'>You got ${correct}/${inputs.length} correct</div></div>`;
+        if (wrongs.length) {
+          wrongs.forEach(w => {
+            feedback.innerHTML += `<div class='explain'>Question ${w.i}: you entered "${w.given || '(blank)'}" ; correct: ${w.correct}. Explanation: ${w.explain}</div>`;
           });
         }
       });
@@ -215,18 +293,18 @@
     document.querySelectorAll('.reset-unit').forEach(btn => {
       btn.addEventListener('click', () => {
         const unitId = btn.closest('.unit').id.replace('unit', '');
-        document.querySelectorAll(`#unit${unitId} input[type=text]`).forEach(inp=>{inp.value='';inp.classList.remove('good','bad');});
-        document.getElementById(`feedback${unitId}`).innerHTML='';
+        document.querySelectorAll(`#unit${unitId} input[type=text]`).forEach(inp => { inp.value = ''; inp.classList.remove('good', 'bad'); });
+        document.getElementById(`feedback${unitId}`).innerHTML = '';
       });
     });
 
     // Tab switching
-    document.querySelectorAll('.tab').forEach(tab=>{
-      tab.addEventListener('click',()=>{
-        document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
-        document.querySelectorAll('.unit').forEach(u=>u.classList.remove('active'));
-        document.getElementById('unit'+tab.dataset.unit).classList.add('active');
+        document.querySelectorAll('.unit').forEach(u => u.classList.remove('active'));
+        document.getElementById('unit' + tab.dataset.unit).classList.add('active');
       });
     });
   </script>
